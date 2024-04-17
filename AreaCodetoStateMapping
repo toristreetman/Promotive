@@ -1,0 +1,41 @@
+import re
+def AreaCodetoState(phonenumbers, map):
+    m = open(map, "r")
+    #create dictionary of state: area codes
+    mapdict = {}
+    for line in m:
+        line = line.replace(",", "")
+        line = line.strip()
+        x = line.split(" ")
+        
+        if x[1].isalpha():
+            state = x[0]+" " +x[1]
+            codes = x[2:len(x)]
+            mapdict[state] = codes
+        else:
+            state = x[0]
+            codes = x[1:len(x)]
+            mapdict[state] = codes
+
+
+    
+    pn = open(phonenumbers, "r")
+    #clean up phone number list
+    for line in pn:
+        line = line.strip("+1()-")
+        areacode = line[0:3]
+        #map areacode to state
+        for k in mapdict:
+            codelist = mapdict[k]
+            for i in range(0,len(codelist),1):
+                
+                if areacode == codelist[i]:
+                    print(k) 
+
+        
+
+    pn.close()
+    m.close()
+ 
+
+AreaCodetoState("phonenumbers.txt", "mapping.txt")
