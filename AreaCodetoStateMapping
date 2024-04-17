@@ -38,4 +38,4 @@ def AreaCodetoState(phonenumbers, map):
     m.close()
  
 
-AreaCodetoState("phonenumbers.txt", "mapping.txt")
+AreaCodetoState("phonenumbers_template.txt", "mapping.txt")
